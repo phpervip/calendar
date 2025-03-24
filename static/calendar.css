@@ -1,0 +1,327 @@
+/* 容器基础样式 */
+.container-c {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.2;
+  font-weight: 400;
+  position: relative;
+  width: 90%;
+  max-width: 1400px;
+  margin: 20px auto;
+  padding: 20px;
+  text-align: center;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 日历主体样式 */
+.container-c .calendar {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex !important;
+  flex-direction: row;
+  color: #222;
+  font-size: 14px;
+  border: 2px solid #f4c493;
+  border-radius: 8px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* 通用边框样式 */
+.border-right {
+  border-right: 1px solid #f4c493;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #f4c493;
+}
+
+.bg {
+  background: #fcf8ef;
+}
+
+/* 语言切换样式 */
+.lang {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+.lang a {
+  cursor: pointer;
+  margin-left: 15px;
+  color: #666;
+}
+
+.lang a.active {
+  color: #bc2f3f;
+}
+
+/* 行和标签通用样式 */
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.row.col {
+  font-size: 14px;
+}
+
+.label {
+  color: #bc2f3f;
+  font-weight: bold;
+  font-size: 14px !important;
+  line-height: 2rem;
+}
+
+/* 左侧面板样式 */
+.container-c .calendar .left-panel {
+  flex: 1;
+}
+
+.container-c .calendar .row.col {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container-c .calendar .row.col>div {
+  flex: 1;
+  text-align: center;
+  font-size: 14px;
+  padding: 0 10px;
+  line-height: 2.5rem;
+}
+
+.container-c .calendar .row.col>.label {
+  flex: 1.2;
+  text-align: left;
+}
+
+.center-label {
+  text-align: center !important;
+}
+
+.left-panel .value-text {
+  flex: 2 !important;
+}
+
+/* 宜忌样式 */
+.yj {
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  border-radius: 50%;
+  color: white;
+  margin: 10px auto;
+}
+
+.yi {
+  background: #5cb85c;
+}
+
+.ji {
+  background: #d9534f;
+}
+
+.yj-container ul {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0px;
+  list-style: none;
+  padding: 0px;
+}
+
+.yj-container li {
+  text-align: center;
+  padding: 0px;
+  border-radius: 4px;
+}
+
+/* 吉神宜趋样式 */
+.row.col.js {
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 5px !important;
+}
+
+.row.col.js .label {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.row.col.js ul {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  list-style: none;
+  padding: 0;
+}
+
+/* 中间面板样式 */
+.container-c .calendar .center-panel {
+  flex: 1.8;
+  padding: 0 20px;
+}
+
+/* 输入区域样式 */
+.inputs {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.inputs div {
+  display: flex;
+  align-items: center;
+}
+
+.inputs input,
+.inputs select {
+  width: 80px;
+  height: 35px;
+  padding: 5px;
+  text-align: center;
+  margin-right: 5px;
+  border-radius: 4px;
+  border: 1px solid #f4c493;
+}
+
+.inputs select {
+  width: 60px;
+}
+
+/* 日期显示样式 */
+.date-display {
+  text-align: center;
+  padding: 14px;
+}
+
+.today {
+  font-size: 80px;
+  color: #bc2f3f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin: 20px 0;
+}
+
+.today a {
+  cursor: pointer;
+  color: #d9534f !important;
+  font-size: 38px;
+  text-decoration: none;
+}
+
+.lunar {
+  text-align: center;
+}
+
+/* 网格布局样式 */
+.grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  padding: 15px;
+  max-height: 700px;
+  gap: 5px;
+  font-size: 14px !important;
+}
+
+.grid-item {
+  background: #fcf8ef;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  position: relative;
+}
+
+/* 网格项边框样式 */
+.grid-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  right: 10px;
+  height: 1px;
+  background-color: #F4C493;
+}
+
+.grid-item:nth-child(1),
+.grid-item:nth-child(3) {
+  border-right: 1px solid #F4C493;
+  padding-bottom: 20px !important;
+}
+
+.grid-item:nth-child(3)::after,
+.grid-item:nth-child(4)::after {
+  display: none;
+}
+
+/* 竖条样式 */
+.bar {
+  position: relative;
+  width: 18px;
+  height: 120px;
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  flex: none;
+  background: #BC2F3F;
+  border-radius: 6px;
+  padding: 5px 7px;
+}
+
+.calendar .bar:before,
+.calendar .bar:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #BC2F3F;
+  margin-left: -8px;
+}
+
+.calendar .bar:before {
+  top: -6px;
+}
+
+.calendar .bar:after {
+  bottom: -6px;
+}
+
+/* 内容区域样式 */
+.content {
+  padding-left: 10px;
+}
+
+.content .row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  padding: 3px 0px;
+}
+
+/* 右侧面板样式 */
+.container-c .calendar .right-panel {
+  flex: 1;
+}
+
+.right-panel .xiangcong {
+  flex: 1 !important;
+}
+
+.right-panel .xiangcong-value {
+  flex: 2 !important;
+}

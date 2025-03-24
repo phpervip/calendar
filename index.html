@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="lunar,阳历,阴历,公历,农历,佛历,道历">
+  <meta name="description" content="lunar是一个无依赖的支持阳历、阴历、佛历和道历的日历工具库。">
+  <title>黄历</title>
+  <link rel="stylesheet" href="static/calendar.css">
+</head>
+
+<body>
+  <div class="container-c" id="container-c" style="position: relative;">
+    <div class="lang">
+      <a class="active">简体中文</a>
+      <a>English</a>
+      <a>繁体中文</a>
+    </div>
+    <div class="close-btn" onclick="closeCalendar()"
+      style="position: absolute; right: 10px; top: 10px; cursor: pointer; font-size: 20px; color: #bc2f3f; z-index: 9999; background: #fff; width: 30px; height: 30px; text-align: center; line-height: 25px; border-radius: 50%; border: 2px solid #bc2f3f;">
+      &times;
+    </div>
+    <div class="calendar">
+      <!-- 左栏 -->
+      <div class="left-panel border-right">
+        <div class="row col border-bottom">
+          <div class="label">乙巳年</div>
+          <div>属蛇</div>
+          <div>覆灯火</div>
+        </div>
+        <div class="row col border-bottom">
+          <div class="label">己卯月</div>
+          <div>属兔</div>
+          <div>城头土</div>
+        </div>
+        <div class="row col border-bottom">
+          <div class="label">己丑日</div>
+          <div>属牛</div>
+          <div>霹雳火</div>
+        </div>
+        <div class="row col bg border-bottom">
+          <div id="prevJieQi">节气春分：2025-03-20 周四</div>
+        </div>
+        <div class="yj-container border-bottom">
+          <div class="yj yi">宜</div>
+          <ul>
+            <li>嫁娶</li>
+            <li>祭祀</li>
+            <li>开光</li>
+            <li>祈福</li>
+          </ul>
+        </div>
+        <div class="row col js border-bottom">
+          <div class="label center-label">吉神宜趋</div>
+          <ul>
+            <li>月德合</li>
+            <li>时阳</li>
+            <li>生气</li>
+          </ul>
+        </div>
+        <div class="row col bg">
+          <div class="label">彭祖</div>
+          <div class="value-text" id="pengzu">己不破券二比并亡</div>
+        </div>
+        <div class="row col bg border-bottom">
+          <div class="label">百忌</div>
+          <div class="value-text" id="baiji">丑不冠带主不还乡</div>
+        </div>
+        <div class="row col">
+          <div class="label">月名</div>
+          <div class="value-text" id="yueming">仲春</div>
+        </div>
+        <div class="row col">
+          <div class="label">月相</div>
+          <div class="value-text" id="yuexiang">下弦月</div>
+        </div>
+        <div class="row col">
+          <div class="label">物候</div>
+          <div class="value-text" id="wuhou">春分 初候 玄鸟至</div>
+        </div>
+      </div>
+
+
+      <!-- 中栏 -->
+      <div class="center-panel border-right bg">
+        <div class="border-bottom">
+          <div class="inputs">
+            <div><input type="number" id="yearInput" value="">年</div>
+            <div>
+              <select id="monthInput">
+                <option value="">1</option>
+                <!-- 其他月份选项 -->
+              </select>月
+            </div>
+            <div><input type="number" id="dayInput" value="">日</div>
+          </div>
+          <div class="date-display">
+            <div>公历 2025年 3月 21日 星期五 白羊座</div>
+            <div class="today">
+              <a href="javascript:void(0);" class="prev" onclick="prevDay()">◀</a>
+              <span>21</span>
+              <a href="javascript:void(0);" class="next" onclick="nextDay()">▶</a>
+            </div>
+            <div class="lunar">农历 二〇二五年 二月 廿二</div>
+          </div>
+        </div>
+
+        <!-- 四格布局 -->
+        <div class="grid-layout">
+          <div class="grid-item">
+            <div class="bar">财神位</div>
+            <div class="content">
+              <div class="row"><span>喜神</span><span>东北</span></div>
+              <div class="row"><span>福神</span><span>正北</span></div>
+              <div class="row"><span>财神</span><span>正北</span></div>
+            </div>
+          </div>
+          <div class="grid-item">
+            <div class="bar">阴阳贵神</div>
+            <div class="content">
+              <div class="row"><span>阳贵神</span><span>正北</span></div>
+              <div class="row"><span>阴贵神</span><span>西南</span></div>
+            </div>
+          </div>
+          <div class="grid-item">
+            <div class="bar">空亡所值</div>
+            <div class="content">
+              <div class="row"><span>年</span><span>寅卯</span></div>
+              <div class="row"><span>月</span><span>申酉</span></div>
+              <div class="row"><span>日</span><span>午未</span></div>
+            </div>
+          </div>
+          <div class="grid-item">
+            <div class="bar">九宫飞星</div>
+            <div class="content">
+              <div class="row"><span>九星</span><span>五黄土玉衡</span></div>
+              <div class="row"><span>二十八宿</span><span>西方娄金狗(吉)</span></div>
+              <div class="row"><span>七龙治水</span><span>四日得金</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右栏 -->
+      <div class="right-panel">
+        <div class="row col border-bottom">
+          <div class="label xiangcong">相冲</div>
+          <div class="xiangcong-value">牛日冲(癸未)羊</div>
+        </div>
+        <div class="row col border-bottom">
+          <div class="label">值神</div>
+          <div>开</div>
+        </div>
+        <div class="row col border-bottom">
+          <div class="label">十二神</div>
+          <div id="">太阳</div>
+        </div>
+        <div class="row col bg border-bottom">
+          <div id="nextJieQi">节气清明：2025-04-04 周五</div>
+        </div>
+        <div class="yj-container border-bottom">
+          <div class="yj ji">忌</div>
+          <ul>
+            <li>合帐</li>
+            <li>开市</li>
+            <li>安葬</li>
+          </ul>
+        </div>
+        <div class="row col border-bottom js ">
+          <div class="label center-label">凶煞宜忌</div>
+          <ul>
+            <li>五虚</li>
+            <li>九空</li>
+            <li>九坎</li>
+            <li>九焦</li>
+            <li>勾陈</li>
+          </ul>
+        </div>
+        <div class=" row col bg">
+          <div class="label">本月胎神</div>
+          <div>占户窗</div>
+        </div>
+        <div class="row col bg border-bottom">
+          <div class="label">今日胎神</div>
+          <div>占门厕 外正北</div>
+        </div>
+        <div class="row col">
+          <div class="label">岁煞</div>
+          <div>岁煞东</div>
+        </div>
+        <div class="row col">
+          <div class="label">六曜</div>
+          <div>大安</div>
+        </div>
+        <div class="row col">
+          <div class="label">日禄</div>
+          <div>午命互禄</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 替换脚本部分 -->
+  <script src="static/lunar.min.js"></script>
+  <script src="static/calendar_.js"></script>
+  <script>
+    // 添加显示日历的函数
+    window.showCalendar = function () {
+      document.getElementById('container-c').style.display = 'block';
+      // 显示后再初始化
+      setTimeout(() => {
+        if (typeof initApp === 'function') {
+          initApp();
+        }
+      }, 100);
+    }
+
+    // 添加关闭日历的函数
+    window.closeCalendar = function () {
+      document.getElementById('container-c').style.display = 'none';
+    }
+
+    // DOM加载完成后初始化
+    document.addEventListener('DOMContentLoaded', function () {
+      function checkAndInit() {
+        if (typeof window.Lunar !== 'undefined') {
+          // 检查容器是否显示
+          const container = document.getElementById('container-c');
+          if (container && container.style.display !== 'none') {
+            if (typeof initApp === 'function') {
+              initApp();
+            }
+          }
+        } else {
+          setTimeout(checkAndInit, 100);
+        }
+      }
+      checkAndInit();
+    });
+  </script>
+
+
+</body>
+
+</html>
