@@ -26,6 +26,8 @@
   border-radius: 8px;
   overflow: hidden;
   box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 /* 通用边框样式 */

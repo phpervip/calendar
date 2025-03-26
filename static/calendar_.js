@@ -57,8 +57,6 @@ function initApp() {
       let nextJieQi = null;
       const currentDate = `${state.year}-${String(state.month).padStart(2, '0')}-${String(state.day).padStart(2, '0')}`;
 
-
-
       // 遍历所有节气，找到最近的前一个和后一个节气
       for (let i = 0; i < jieQiList.length; i++) {
         const jieQi = lunar._p.jieQi[jieQiList[i]];
@@ -103,30 +101,62 @@ function initApp() {
         ji.innerHTML = jinli.map(item => `<li>${item}</li>`).join('');
       }
 
-
+      // 彭祖 百忌
       const pengZuGan = lunar.getPengZuGan(); // 获取日干的彭祖百忌
       const pengZuZhi = lunar.getPengZuZhi(); // 获取日支的彭祖百忌
 
-      console.log('Nine Star Type:', pengZuGan);
       document.getElementById('pengzu').innerHTML = pengZuGan;
       document.getElementById('baiji').innerHTML = pengZuZhi;
 
 
-      const nineStar = lunar.getDayNineStar();
+      // 阳贵神 阴贵神
+      const positionYangGui = lunar.getPositionYangGui();
+      const positionYinGui = lunar.getPositionYinGui();
+      document.getElementById('yangGui').innerHTML = positionYangGui;
+      document.getElementById('yinGui').innerHTML = positionYinGui;
 
+      // 空亡所值
+      const yearKongWang = lunar.getYearXunKong()
+      const monthKongWang = lunar.getMonthXunKong()
+      const dayKongWang = lunar.getDayXunKong()
+      document.getElementById('yearKongWang').innerHTML = yearKongWang;
+      document.getElementById('monthKongWang').innerHTML = monthKongWang;
+      document.getElementById('dayKongWang').innerHTML = dayKongWang;
+
+      // 九星
+      const yearNineStar = lunar.getYearNineStar();
+      const dayNineStar = lunar.getDayNineStar();
+      document.getElementById('yearNineStar').innerHTML = yearNineStar;
+
+      // 定义月份季节映射
+      const monthSeasonMap = {
+        1: '孟春',   // 正月：春季初期
+        2: '仲春',   // 二月：春季中期
+        3: '季春',   // 三月：春季末期
+        4: '孟夏',   // 四月：夏季初期
+        5: '仲夏',   // 五月：夏季中期
+        6: '季夏',   // 六月：夏季末期
+        7: '孟秋',   // 七月：秋季初期
+        8: '仲秋',   // 八月：秋季中期
+        9: '季秋',   // 九月：秋季末期
+        10: '孟冬',  // 十月：冬季初期
+        11: '仲冬',  // 十一月：冬季中期
+        12: '季冬'   // 十二月：冬季末期
+      }
+
+      // 吉神，凶煞
       const jishen = lunar.getDayJiShen()
-      $('#jishen').html(jishen.map(item => `<li  style="width:30%;margin-left: 5px;"> ${item} </li>`).join(''));
+      document.getElementById('jishen').innerHTML = jishen.map(item => `<li> ${item} </li>`).join('');
 
       const xiongSha = lunar.getDayXiongSha();
-      $('#xiongsha').html(xiongSha.map(item => `<li  style="width:30%"> ${item} </li>`).join(''));
+      document.getElementById('xiongsha').innerHTML = xiongSha.map(item => `<li style="width:30%"> ${item} </li>`).join('');
 
-      $('#yueming').html(lunar.getJieQi())
-      $('#wuhou').html(lunar.getHou())
-      $('#yuexiang').html(lunar.getYueXiang())
+      // 月名，月相，物候
+      const season = monthSeasonMap[lunar.getMonth()];
+      document.getElementById('yueming').innerHTML = season;
+      document.getElementById('yuexiang').innerHTML = lunar.getYueXiang()
+      document.getElementById('wuhou').innerHTML = lunar.getHou()
 
-      const dayChong = `${lunar.getDayShengXiao()}日冲(${lunar.getDayChongGan()}${lunar.getDayChong()})${lunar.getDayChongShengXiao()}`;
-
-      $('#xiangchong').html(dayChong)
       const monthZhi = lunar.getMonthZhi();
       // 获取月支对应的偏移量
       const offset = LunarUtil.ZHI_TIAN_SHEN_OFFSET[monthZhi];
@@ -135,61 +165,71 @@ function initApp() {
       // 从值神表中获取对应的值神
       const tianShen = LunarUtil.TIAN_SHEN[index];
 
-      $('#zhishen').html(tianShen)
-
-
-      // 获取月支
+      // 获取月支 十二神
       const offset12 = LunarUtil.ZHI_TIAN_SHEN_OFFSET[monthZhi]; // 获取偏移值
       const tianShen12 = LunarUtil.TIAN_SHEN[(lunar._p.dayZhiIndex + offset12) % 12 + 1];
       const tianShenType = LunarUtil.TIAN_SHEN_TYPE[tianShen12];
-      $('#shen12').html(`${tianShen12}（${tianShenType}日）`);
+      document.getElementById('shen12').innerHTML = `${tianShen12}（${tianShenType}日）`;
+
+      //  吉神方位显示
+      const xiShen = lunar.getDayPositionXiDesc();
+      const fuShen = lunar.getDayPositionFuDesc();
+      const caiShen = lunar.getDayPositionCaiDesc();
+
+      document.getElementById('xishen').innerHTML = xiShen;
+      document.getElementById('fushen').innerHTML = fuShen;
+      document.getElementById('caishen').innerHTML = caiShen;
+      document.getElementById('liuYao').innerHTML = lunar.getLiuYao();
+      document.getElementById('dayLu').innerHTML = lunar.getDayLu(); // 日局
+
+      // 值神 相冲
+      document.getElementById('zhishen').innerHTML = tianShen;
+      const dayChong = `${lunar.getDayShengXiao()}日冲(${lunar.getDayChongGan()}${lunar.getDayChong()})${lunar.getDayChongShengXiao()}`;
+      document.getElementById('xiangchong').innerHTML = dayChong;
+
+      // 获取 胎神
+      document.getElementById('monthTaiShen').innerHTML = lunar.getMonthPositionTai();
+      document.getElementById('dayTaiShen').innerHTML = lunar.getDayPositionTai();
 
 
+      var lunarYear = LunarYear.fromYear(lunar.getYear());
+      const zhishui = lunarYear.getZhiShui();//七龙治水
+      const gengtian = lunarYear.getGengTian();//耕田
+      const fenbing = lunarYear.getFenBing();//分饼
+      const dejin = lunarYear.getDeJin();//得金
+      document.getElementById('zhishui').innerHTML = zhishui;
+      document.getElementById('gengtian').innerHTML = gengtian;
+      document.getElementById('fenbing').innerHTML = fenbing;
+      document.getElementById('dejin').innerHTML = dejin;
 
-
-
-      $('#yuexiang').html(lunar.getYueXiang())
 
       // 获取胎神信息
       const monthTaiShen = lunar.getMonthPositionTai(); // 本月胎神
       const dayTaiShen = lunar.getDayPositionTai();     // 今日胎神
-      $('#monthTaiShen').html(monthTaiShen);
-      $('#dayTaiShen').html(dayTaiShen);
+      document.getElementById('monthTaiShen').innerHTML = monthTaiShen;
+      document.getElementById('dayTaiShen').innerHTML = dayTaiShen;
 
       // 获取岁煞
-      const suiSha = lunar.getYearSuiSha();
-      $('#suiSha').html(suiSha);
+      const suiSha = lunar.getDaySha();
+      // console.log(suiSha)
+      document.getElementById('suiSha').innerHTML = suiSha;
 
       // 获取六曜
-      const liuYao = lunar.getDayLiuYao();
-      $('#liuYao').html(liuYao);
+      const liuYao = lunar.getLiuYao();
+      document.getElementById('liuYao').innerHTML = liuYao;
 
       // 获取日禄
       const dayLu = lunar.getDayLu();
-      $('#dayLu').html(dayLu);
-
-
-
-
-
-
-
-
-
+      document.getElementById('dayLu').innerHTML = dayLu;
 
       // 更新吉神方位
       const xiPosition = document.querySelector('.grid-item:nth-child(1) .row:nth-child(1) span:last-child');
       const fuPosition = document.querySelector('.grid-item:nth-child(1) .row:nth-child(2) span:last-child');
       const caiPosition = document.querySelector('.grid-item:nth-child(1) .row:nth-child(3) span:last-child');
 
-
-
-
-
       if (xiPosition) xiPosition.textContent = lunar.getDayPositionXi();
       if (fuPosition) fuPosition.textContent = lunar.getDayPositionFu();
       if (caiPosition) caiPosition.textContent = lunar.getDayPositionCai();
-
       console.log('渲染完成:', { lunar, solar });
     } catch (error) {
       console.error('渲染出错:', error);

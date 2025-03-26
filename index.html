@@ -53,7 +53,7 @@
         </div>
         <div class="row col js border-bottom">
           <div class="label center-label">吉神宜趋</div>
-          <ul>
+          <ul id="jishen">
             <li>月德合</li>
             <li>时阳</li>
             <li>生气</li>
@@ -69,11 +69,11 @@
         </div>
         <div class="row col">
           <div class="label">月名</div>
-          <div class="value-text" id="yueming">仲春</div>
+          <div class="value-text" id="yueming"></div>
         </div>
         <div class="row col">
           <div class="label">月相</div>
-          <div class="value-text" id="yuexiang">下弦月</div>
+          <div class="value-text" id="yuexiang"></div>
         </div>
         <div class="row col">
           <div class="label">物候</div>
@@ -98,9 +98,9 @@
           <div class="date-display">
             <div>公历 2025年 3月 21日 星期五 白羊座</div>
             <div class="today">
-              <a href="javascript:void(0);" class="prev" onclick="prevDay()">◀</a>
+              <a href="javascript:void(0);" class="prev">◀</a>
               <span>21</span>
-              <a href="javascript:void(0);" class="next" onclick="nextDay()">▶</a>
+              <a href="javascript:void(0);" class="next">▶</a>
             </div>
             <div class="lunar">农历 二〇二五年 二月 廿二</div>
           </div>
@@ -111,32 +111,35 @@
           <div class="grid-item">
             <div class="bar">财神位</div>
             <div class="content">
-              <div class="row"><span>喜神</span><span>东北</span></div>
-              <div class="row"><span>福神</span><span>正北</span></div>
-              <div class="row"><span>财神</span><span>正北</span></div>
+              <div class="row"><span>喜神</span><span id="xishen"></span></div>
+              <div class="row"><span>福神</span><span id="fushen"></span></div>
+              <div class="row"><span>财神</span><span id="caishen"></span></div>
             </div>
           </div>
           <div class="grid-item">
             <div class="bar">阴阳贵神</div>
             <div class="content">
-              <div class="row"><span>阳贵神</span><span>正北</span></div>
-              <div class="row"><span>阴贵神</span><span>西南</span></div>
+              <div class="row"><span>阳贵神</span><span id="yangGui"></span></div>
+              <div class="row"><span>阴贵神</span><span id="yinGui"></span></div>
             </div>
           </div>
           <div class="grid-item">
             <div class="bar">空亡所值</div>
             <div class="content">
-              <div class="row"><span>年</span><span>寅卯</span></div>
-              <div class="row"><span>月</span><span>申酉</span></div>
-              <div class="row"><span>日</span><span>午未</span></div>
+              <div class="row"><span>年</span><span id="yearKongWang"></span></div>
+              <div class="row"><span>月</span><span id="monthKongWang"></span></div>
+              <div class="row"><span>日</span><span id="dayKongWang"></span></div>
             </div>
           </div>
           <div class="grid-item">
             <div class="bar">九宫飞星</div>
             <div class="content">
-              <div class="row"><span>九星</span><span>五黄土玉衡</span></div>
-              <div class="row"><span>二十八宿</span><span>西方娄金狗(吉)</span></div>
-              <div class="row"><span>七龙治水</span><span>四日得金</span></div>
+              <div class="row"><span class="label">九星</span><span id="yearNineStar">五黄土玉衡</span></div>
+              <div class="row"><span class="label">二十八宿</span><span id="xing28">西方娄金狗(吉)</span></div>
+              <div class="row"><span id="zhishui">七龙治水</span><span id="dejin">四日得金</span></div>
+              <div class="row"><span id="fenbing">九人分饼</span><span id="gengtian">四牛耕田</span></div>
+
+
             </div>
           </div>
         </div>
@@ -146,15 +149,15 @@
       <div class="right-panel">
         <div class="row col border-bottom">
           <div class="label xiangcong">相冲</div>
-          <div class="xiangcong-value">牛日冲(癸未)羊</div>
+          <div class="xiangcong-value" id="xiangchong">牛日冲(癸未)羊</div>
         </div>
         <div class="row col border-bottom">
           <div class="label">值神</div>
-          <div>开</div>
+          <div id="zhishen">开</div>
         </div>
         <div class="row col border-bottom">
           <div class="label">十二神</div>
-          <div id="">太阳</div>
+          <div id="shen12">勾陈(黑道日)</div>
         </div>
         <div class="row col bg border-bottom">
           <div id="nextJieQi">节气清明：2025-04-04 周五</div>
@@ -167,9 +170,9 @@
             <li>安葬</li>
           </ul>
         </div>
-        <div class="row col border-bottom js ">
+        <div class="row col js border-bottom">
           <div class="label center-label">凶煞宜忌</div>
-          <ul>
+          <ul id="xiongsha">
             <li>五虚</li>
             <li>九空</li>
             <li>九坎</li>
@@ -179,23 +182,23 @@
         </div>
         <div class=" row col bg">
           <div class="label">本月胎神</div>
-          <div>占户窗</div>
+          <div id="monthTaiShen"></div>
         </div>
         <div class="row col bg border-bottom">
           <div class="label">今日胎神</div>
-          <div>占门厕 外正北</div>
+          <div id="dayTaiShen"></div>
         </div>
         <div class="row col">
           <div class="label">岁煞</div>
-          <div>岁煞东</div>
+          <div id="suiSha"></div>
         </div>
         <div class="row col">
           <div class="label">六曜</div>
-          <div>大安</div>
+          <div id="liuYao"></div>
         </div>
         <div class="row col">
           <div class="label">日禄</div>
-          <div>午命互禄</div>
+          <div id="dayLu"></div>
         </div>
       </div>
     </div>
