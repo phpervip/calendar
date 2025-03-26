@@ -16,37 +16,35 @@ function initApp() {
   }
   console.log('Lunar loaded, initializing...');
   console.log('Lunar object:', window.Lunar);
-
   // 渲染函数
   window.render = function () {
     try {
       // 直接使用 window.Lunar 的方法
-      const lunar = window.Lunar.fromYmd(window.state.year, window.state.month, window.state.day);
-      const solar = lunar.getSolar(); // 使用 lunar 对象获取 solar
-
+      const solar = window.Solar.fromYmd(window.state.year, window.state.month, window.state.day);
+      const lunar = solar.getLunar(); // 使用 solar 对象获取 solar
       // 更新年月日显示
-      document.querySelector('.left-panel .row:nth-child(1) .label').textContent = lunar.getYearInGanZhi() + '年';
-      document.querySelector('.left-panel .row:nth-child(1) div:nth-child(2)').textContent = `属${lunar.getYearShengXiao()}`;
-      document.querySelector('.left-panel .row:nth-child(1) div:nth-child(3)').textContent = lunar.getYearNaYin();
+      document.getElementById('yearGanZhi').innerHTML = lunar.getYearInGanZhi() + '年';
+      document.getElementById('yearShengXiao').innerHTML = `属${lunar.getYearShengXiao()}`;
+      document.getElementById('yearNaYin').innerHTML = lunar.getYearNaYin();
 
-      document.querySelector('.left-panel .row:nth-child(2) .label').textContent = lunar.getMonthInGanZhi() + '月';
-      document.querySelector('.left-panel .row:nth-child(2) div:nth-child(2)').textContent = `属${lunar.getMonthShengXiao()}`;
-      document.querySelector('.left-panel .row:nth-child(2) div:nth-child(3)').textContent = lunar.getMonthNaYin();
+      document.getElementById('monthGanZhi').innerHTML = lunar.getMonthInGanZhi() + '月';
+      document.getElementById('monthShengXiao').innerHTML = `属${lunar.getMonthShengXiao()}`;
+      document.getElementById('monthNaYin').innerHTML = lunar.getMonthNaYin();
 
-      document.querySelector('.left-panel .row:nth-child(3) .label').textContent = lunar.getDayInGanZhi() + '日';
-      document.querySelector('.left-panel .row:nth-child(3) div:nth-child(2)').textContent = `属${lunar.getDayShengXiao()}`;
-      document.querySelector('.left-panel .row:nth-child(3) div:nth-child(3)').textContent = lunar.getDayNaYin();
+      document.getElementById('dayGanZhi').innerHTML = lunar.getDayInGanZhi() + '日';
+      document.getElementById('dayShengXiao').innerHTML = `属${lunar.getDayShengXiao()}`;
+      document.getElementById('dayNaYin').innerHTML = lunar.getDayNaYin();
 
       // 更新中间面板日期显示
       const weekDays = ['日', '一', '二', '三', '四', '五', '六'];
       const weekDay = weekDays[solar.getWeek()];
 
-      document.querySelector('.date-display div:first-child').textContent =
+      document.getElementById('solarDate').innerHTML =
         `公历 ${state.year}年 ${state.month}月 ${state.day}日 星期${weekDay} ${solar.getXingZuo()}座`;
 
-      document.querySelector('.date-display .today span').textContent = state.day;
+      document.getElementById('date-day').innerHTML = state.day;
 
-      document.querySelector('.date-display .lunar').textContent =
+      document.getElementById('lunarDate').innerHTML =
         `农历 ${lunar.getYearInChinese()}年 ${lunar.getMonthInChinese()}月 ${lunar.getDayInChinese()}`;
 
 
@@ -90,13 +88,13 @@ function initApp() {
       }
       // 更新宜忌
       const yinli = lunar.getDayYi();
-      const yi = document.querySelector('.yj-container .yi + ul');
+      const yi = document.getElementById('yj-yi');
       if (yi) {
         yi.innerHTML = yinli.map(item => `<li>${item}</li>`).join('');
       }
 
       const jinli = lunar.getDayJi();
-      const ji = document.querySelector('.yj-container .ji + ul');
+      const ji = document.getElementById('yj-ji');
       if (ji) {
         ji.innerHTML = jinli.map(item => `<li>${item}</li>`).join('');
       }
@@ -123,11 +121,13 @@ function initApp() {
       document.getElementById('monthKongWang').innerHTML = monthKongWang;
       document.getElementById('dayKongWang').innerHTML = dayKongWang;
 
-      // 九星
+      // 九星 二十八宿
       const yearNineStar = lunar.getYearNineStar();
       const dayNineStar = lunar.getDayNineStar();
       document.getElementById('yearNineStar').innerHTML = yearNineStar;
 
+      const xiu28 = lunar.getGong() + '方' + lunar.getXiu() + lunar.getZheng() + lunar.getAnimal() + '(' + lunar.getXiuLuck() + ')'
+      document.getElementById('xiu28').innerHTML = xiu28;
       // 定义月份季节映射
       const monthSeasonMap = {
         1: '孟春',   // 正月：春季初期
@@ -149,7 +149,7 @@ function initApp() {
       document.getElementById('jishen').innerHTML = jishen.map(item => `<li> ${item} </li>`).join('');
 
       const xiongSha = lunar.getDayXiongSha();
-      document.getElementById('xiongsha').innerHTML = xiongSha.map(item => `<li style="width:30%"> ${item} </li>`).join('');
+      document.getElementById('xiongsha').innerHTML = xiongSha.map(item => `<li> ${item} </li>`).join('');
 
       // 月名，月相，物候
       const season = monthSeasonMap[lunar.getMonth()];
@@ -183,7 +183,8 @@ function initApp() {
       document.getElementById('dayLu').innerHTML = lunar.getDayLu(); // 日局
 
       // 值神 相冲
-      document.getElementById('zhishen').innerHTML = tianShen;
+      // document.getElementById('zhishen').innerHTML = tianShen;
+      document.getElementById('zhishen').innerHTML = lunar.getZhiXing();
       const dayChong = `${lunar.getDayShengXiao()}日冲(${lunar.getDayChongGan()}${lunar.getDayChong()})${lunar.getDayChongShengXiao()}`;
       document.getElementById('xiangchong').innerHTML = dayChong;
 
