@@ -122,7 +122,7 @@
 }
 
 .yi {
-  background: #a8a7a7ee;
+  background: #a7a7a7;
 }
 
 .ji {
@@ -279,7 +279,7 @@
   display: flex;
   align-items: center;
   flex: none;
-  /* background: #BC2F3F; */
+  background: #a7a7a7;
   border-radius: 6px;
   padding: 5px 7px;
 }
@@ -292,7 +292,7 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  /* background: #BC2F3F; */
+  background: #a7a7a7;
   margin-left: -8px;
 }
 
