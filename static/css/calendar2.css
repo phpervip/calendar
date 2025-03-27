@@ -1,4 +1,10 @@
 /* 容器基础样式 */
+*,
+::after,
+::before {
+  box-sizing: unset;
+}
+
 .container-c {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.2;
@@ -60,13 +66,14 @@
 } */
 
 /* 行和标签通用样式 */
-.row {
+.row-r {
   display: flex;
   justify-content: space-between;
   padding: 5px;
+
 }
 
-.row.col {
+.row-r.col-c {
   font-size: 14px;
 }
 
@@ -82,14 +89,14 @@
   flex: 1;
 }
 
-.container-c .calendar .row.col {
+.container-c .calendar .row-r.col-c {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
 
-.container-c .calendar .row.col>div {
+.container-c .calendar .row-r.col-c>div {
   flex: 1;
   text-align: center;
   font-size: 14px;
@@ -97,8 +104,8 @@
   line-height: 2.5rem;
 }
 
-.container-c .calendar .row.col>.label {
-  flex: 1.2;
+.container-c .calendar .row-r.col-c>.label {
+  flex: 1;
   text-align: left;
 }
 
@@ -107,7 +114,7 @@
 }
 
 .left-panel .value-text {
-  flex: 2 !important;
+  flex: 3 !important;
 }
 
 .close-btn {
@@ -152,6 +159,7 @@
   gap: 0px;
   list-style: none;
   padding: 0px;
+  min-height: 100px;
 }
 
 .yj-container li {
@@ -161,19 +169,19 @@
 }
 
 /* 吉神宜趋样式 */
-.row.col.js {
+.row-r.col-c.js {
   display: flex !important;
   flex-direction: column !important;
   padding: 5px !important;
 }
 
-.row.col.js .label {
+.row-r.col-c.js .label {
   width: 100%;
   text-align: center;
   margin-bottom: 10px;
 }
 
-.row.col.js ul {
+.row-r.col-c.js ul {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -263,6 +271,36 @@
   position: relative;
 }
 
+/* 添加媒体查询 */
+@media screen and (max-width: 1200px) {
+  .grid-item {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .bar {
+    width: 100%;
+    height: auto;
+    padding: 8px;
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .bar:before,
+  .bar:after {
+    display: none;
+    /* 移除两端的圆点 */
+  }
+
+  .content {
+    padding-left: 0;
+    /* 移除左侧内边距 */
+  }
+}
+
 /* 网格项边框样式 */
 .grid-item::after {
   content: '';
@@ -272,6 +310,7 @@
   right: 10px;
   height: 1px;
   background-color: #F4C493;
+  box-sizing: unset;
 }
 
 .grid-item:nth-child(1),
@@ -313,6 +352,15 @@
   margin-left: -8px;
 }
 
+/* 调整十二神的显示样式 */
+.row-r.col-c {
+  display: flex;
+  /* 内容从右向左排列 */
+  justify-content: flex-start;
+  overflow: visible;
+  /* 允许内容溢出 */
+}
+
 .calendar .bar:before {
   top: -6px;
 }
@@ -326,7 +374,7 @@
   padding-left: 10px;
 }
 
-.content .row {
+.content .row-r {
   display: grid;
   grid-template-columns: auto 1fr auto;
   padding: 3px 0px;
@@ -343,4 +391,97 @@
 
 .right-panel .xiangcong-value {
   flex: 2 !important;
+}
+
+.right-panel .daylu {
+  flex: 1 !important;
+}
+
+.right-panel .daylu-value {
+  flex: 3 !important;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+/* 媒体查询，处理小屏幕布局 */
+@media screen and (max-width: 1200px) {
+  .calendar {
+    flex-direction: column;
+    gap: 0;
+    /* 移除间距 */
+  }
+
+  .left-panel,
+  .right-panel,
+  .center-panel {
+    width: 100%;
+    margin-bottom: 0;
+    /* 移除底部间距 */
+    border-bottom: 1px solid #f4c493;
+    /* 添加分隔线 */
+  }
+
+  .right-panel {
+    border-bottom: none;
+    /* 最后一个面板不需要底部边框 */
+  }
+
+  @media screen and (max-width: 768px) {
+    .grid-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      /* 改为两列布局 */
+      gap: 10px;
+    }
+
+    .grid-item .bar {
+      writing-mode: horizontal-tb;
+      width: 80%;
+      height: auto;
+      text-align: center;
+      /* 改为居中对齐 */
+      border-bottom: 1px solid #f4c493;
+      background: #f4c493;
+      font-weight: bold;
+      /* 加粗 */
+    }
+
+    .grid-item {
+      background: #fcf8ef;
+      border-radius: 4px;
+      overflow: visible;
+    }
+
+    .grid-item:nth-child(1),
+    .grid-item:nth-child(3) {
+      border-right: 0;
+    }
+
+    .container-c .calendar .center-panel {
+      padding: 0 !important;
+    }
+
+    .content {
+      padding: 0;
+    }
+
+    /* 专门处理第四个格子的内容区域 */
+    .grid-item:nth-child(4) .content {
+      width: 130%;
+      margin-left: -30px;
+    }
+
+    .grid-item:nth-child(4) .row-r {
+      font-size: 12px;
+      /* 稍微缩小字体 */
+    }
+
+    .container-c .calendar .row-r.col-c {
+      min-height: 80px;
+    }
+  }
 }

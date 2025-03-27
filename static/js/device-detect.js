@@ -3,6 +3,6 @@ function isMobile() {
 }
 
 // 页面加载时检测设备并跳转
-if (isMobile()) {
-  window.location.href = 'mobile.html';
-}
+// if (isMobile()) {
+//   window.location.href = 'index.html';
+// }

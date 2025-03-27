@@ -7,81 +7,22 @@
   <meta name="keywords" content="lunar,阳历,阴历,公历,农历,佛历,道历">
   <meta name="description" content="lunar是一个无依赖的支持阳历、阴历、佛历和道历的日历工具库。">
   <title>黄历</title>
-  <link rel="stylesheet" href="static/calendar.css?v=1.0">
-  <script src="static/device-detect.js"></script>
+  <link rel="stylesheet" href="static/css/calendar2.css?v=1.0">
+  <script src="static/js/device-detect.js"></script>
 </head>
 
 <body>
+  <!-- 从这里开始COPY -->
   <div class="container-c" id="container-c" style="position: relative;">
-    <div class="lang">
-      <a class="active">简体中文</a>
-      <a>English</a>
-      <a>繁体中文</a>
-    </div>
-    <div class="close-btn" onclick="closeCalendar()" style="">
+    <!-- <div class="lang">
+        <a class="active">简体中文</a>
+        <a>English</a>
+        <a>繁体中文</a>
+    </div> -->
+    <div class="close-btn" onclick="closeCalendar()">
       &times;
     </div>
     <div class="calendar">
-      <!-- 左栏 -->
-      <div class="left-panel border-right">
-        <div class="row col border-bottom">
-          <div class="label" id="yearGanZhi">乙巳年</div>
-          <div id="yearShengXiao">属蛇</div>
-          <div id="yearNaYin">覆灯火</div>
-        </div>
-        <div class="row col border-bottom">
-          <div class="label" id="monthGanZhi">己卯月</div>
-          <div id="monthShengXiao">属兔</div>
-          <div id="monthNaYin">城头土</div>
-        </div>
-        <div class="row col border-bottom">
-          <div class="label" id="dayGanZhi">己丑日</div>
-          <div id="dayShengXiao">属牛</div>
-          <div id="dayNaYin">霹雳火</div>
-        </div>
-        <div class="row col bg border-bottom">
-          <div id="prevJieQi">节气春分：2025-03-20 周四</div>
-        </div>
-        <div class="yj-container border-bottom">
-          <div class="yj yi">宜</div>
-          <ul id="yj-yi">
-            <li>嫁娶</li>
-            <li>祭祀</li>
-            <li>开光</li>
-            <li>祈福</li>
-          </ul>
-        </div>
-        <div class="row col js border-bottom">
-          <div class="label center-label">吉神宜趋</div>
-          <ul id="jishen">
-            <li>月德合</li>
-            <li>时阳</li>
-            <li>生气</li>
-          </ul>
-        </div>
-        <div class="row col bg">
-          <div class="label">彭祖</div>
-          <div class="value-text" id="pengzu">己不破券二比并亡</div>
-        </div>
-        <div class="row col bg border-bottom">
-          <div class="label">百忌</div>
-          <div class="value-text" id="baiji">丑不冠带主不还乡</div>
-        </div>
-        <div class="row col">
-          <div class="label">月名</div>
-          <div class="value-text" id="yueming"></div>
-        </div>
-        <div class="row col">
-          <div class="label">月相</div>
-          <div class="value-text" id="yuexiang"></div>
-        </div>
-        <div class="row col">
-          <div class="label">物候</div>
-          <div class="value-text" id="wuhou">春分 初候 玄鸟至</div>
-        </div>
-      </div>
-
-
       <!-- 中栏 -->
       <div class="center-panel border-right bg">
         <div class="border-bottom">
@@ -111,53 +52,114 @@
           <div class="grid-item">
             <div class="bar">财神位</div>
             <div class="content">
-              <div class="row"><span>喜神</span><span id="xishen"></span></div>
-              <div class="row"><span>福神</span><span id="fushen"></span></div>
-              <div class="row"><span>财神</span><span id="caishen"></span></div>
+              <div class="row-r"><span>喜神</span><span id="xishen"></span></div>
+              <div class="row-r"><span>福神</span><span id="fushen"></span></div>
+              <div class="row-r"><span>财神</span><span id="caishen"></span></div>
             </div>
           </div>
           <div class="grid-item">
             <div class="bar">阴阳贵神</div>
             <div class="content">
-              <div class="row"><span>阳贵神</span><span id="yangGui"></span></div>
-              <div class="row"><span>阴贵神</span><span id="yinGui"></span></div>
+              <div class="row-r"><span>阳贵神</span><span id="yangGui"></span></div>
+              <div class="row-r"><span>阴贵神</span><span id="yinGui"></span></div>
             </div>
           </div>
           <div class="grid-item">
             <div class="bar">空亡所值</div>
             <div class="content">
-              <div class="row"><span>年</span><span id="yearKongWang"></span></div>
-              <div class="row"><span>月</span><span id="monthKongWang"></span></div>
-              <div class="row"><span>日</span><span id="dayKongWang"></span></div>
+              <div class="row-r"><span>年</span><span id="yearKongWang"></span></div>
+              <div class="row-r"><span>月</span><span id="monthKongWang"></span></div>
+              <div class="row-r"><span>日</span><span id="dayKongWang"></span></div>
             </div>
           </div>
           <div class="grid-item">
             <div class="bar">九宫飞星</div>
             <div class="content">
-              <div class="row"><span class="label">九星</span><span id="yearNineStar">五黄土玉衡</span></div>
-              <div class="row"><span class="label">二十八宿</span><span id="xiu28">西方娄金狗(吉)</span></div>
-              <div class="row"><span id="zhishui">七龙治水</span><span id="dejin">四日得金</span></div>
-              <div class="row"><span id="fenbing">九人分饼</span><span id="gengtian">四牛耕田</span></div>
+              <div class="row-r"><span class="label">九星</span><span id="yearNineStar">五黄土玉衡</span></div>
+              <div class="row-r"><span class="label">二十八宿</span><span id="xiu28">西方娄金狗(吉)</span></div>
+              <div class="row-r"><span id="zhishui">七龙治水</span><span id="dejin">四日得金</span></div>
+              <div class="row-r"><span id="fenbing">九人分饼</span><span id="gengtian">四牛耕田</span></div>
             </div>
           </div>
         </div>
       </div>
+      <!-- 左栏 -->
+      <div class="left-panel border-right">
+        <div class="row-r col-c border-bottom">
+          <div class="label" id="yearGanZhi">乙巳年</div>
+          <div id="yearShengXiao">属蛇</div>
+          <div id="yearNaYin">覆灯火</div>
+        </div>
+        <div class="row-r col-c border-bottom">
+          <div class="label" id="monthGanZhi">己卯月</div>
+          <div id="monthShengXiao">属兔</div>
+          <div id="monthNaYin">城头土</div>
+        </div>
+        <div class="row-r col-c border-bottom">
+          <div class="label" id="dayGanZhi">己丑日</div>
+          <div id="dayShengXiao">属牛</div>
+          <div id="dayNaYin">霹雳火</div>
+        </div>
+        <div class="row-r col-c bg border-bottom">
+          <div id="prevJieQi">节气春分：2025-03-20 周四</div>
+        </div>
+        <div class="yj-container border-bottom">
+          <div class="yj yi">宜</div>
+          <ul id="yj-yi">
+            <li>嫁娶</li>
+            <li>祭祀</li>
+            <li>开光</li>
+            <li>祈福</li>
+          </ul>
+        </div>
+        <div class="row-r col-c js border-bottom">
+          <div class="label center-label">吉神宜趋</div>
+          <ul id="jishen">
+            <li>月德合</li>
+            <li>时阳</li>
+            <li>生气</li>
+          </ul>
+        </div>
+        <div class="row-r col-c bg">
+          <div class="label xiangcong">彭祖</div>
+          <div class="value-text xiangcong-value" id="pengzu">己不破券二比并亡</div>
+        </div>
+        <div class="row-r col-c bg border-bottom">
+          <div class="label xiangcong">百忌</div>
+          <div class="value-text xiangcong-value" id="baiji">丑不冠带主不还乡</div>
+        </div>
+        <div class="row-r col-c">
+          <div class="label">月名</div>
+          <div class="value-text" id="yueming"></div>
+        </div>
+        <div class="row-r col-c">
+          <div class="label">月相</div>
+          <div class="value-text" id="yuexiang"></div>
+        </div>
+        <div class="row-r col-c">
+          <div class="label">物候</div>
+          <div class="value-text" id="wuhou">春分 初候 玄鸟至</div>
+        </div>
+      </div>
+
+
+
 
       <!-- 右栏 -->
       <div class="right-panel">
-        <div class="row col border-bottom">
+        <div class="row-r col-c border-bottom">
           <div class="label xiangcong">相冲</div>
           <div class="xiangcong-value" id="xiangchong">牛日冲(癸未)羊</div>
         </div>
-        <div class="row col border-bottom">
+        <div class="row-r col-c border-bottom">
           <div class="label">值神</div>
           <div id="zhishen">开</div>
         </div>
-        <div class="row col border-bottom">
-          <div class="label">十二神</div>
-          <div id="shen12">勾陈(黑道日)</div>
+        <div class="row-r col-c border-bottom">
+          <div class="label xiangcong">十二神</div>
+          <div class="xiangcong-value" id="shen12">勾陈(黑道日)</div>
         </div>
-        <div class="row col bg border-bottom">
+        <div class="row-r col-c bg border-bottom">
           <div id="nextJieQi">节气清明：2025-04-04 周五</div>
         </div>
         <div class="yj-container border-bottom">
@@ -168,7 +170,7 @@
             <li>安葬</li>
           </ul>
         </div>
-        <div class="row col js border-bottom">
+        <div class="row-r col-c js border-bottom">
           <div class="label center-label">凶煞宜忌</div>
           <ul id="xiongsha">
             <li>五虚</li>
@@ -178,33 +180,33 @@
             <li>勾陈</li>
           </ul>
         </div>
-        <div class=" row col bg">
-          <div class="label">本月胎神</div>
-          <div id="monthTaiShen"></div>
+        <div class="row-r col-c bg">
+          <div class="label xiangcong">本月胎神</div>
+          <div class="xiangcong-value" id="monthTaiShen"></div>
         </div>
-        <div class="row col bg border-bottom">
-          <div class="label">今日胎神</div>
-          <div id="dayTaiShen"></div>
+        <div class="row-r col-c bg border-bottom">
+          <div class="label xiangcong">本日胎神</div>
+          <div class="xiangcong-value" id="dayTaiShen"></div>
         </div>
-        <div class="row col">
+        <div class="row-r col-c">
           <div class="label">岁煞</div>
           <div id="suiSha"></div>
         </div>
-        <div class="row col">
+        <div class="row-r col-c">
           <div class="label">六曜</div>
           <div id="liuYao"></div>
         </div>
-        <div class="row col">
-          <div class="label">日禄</div>
-          <div id="dayLu"></div>
+        <div class="row-r col-c">
+          <div class="label daylu">日禄</div>
+          <div class="daylu-value" id="dayLu"></div>
         </div>
       </div>
     </div>
   </div>
 
   <!-- 替换脚本部分 -->
-  <script src="static/lunar.min.js"></script>
-  <script src="static/calendar.js?v=1.0"></script>
+  <script src="static/js/lunar.min.js"></script>
+  <script src="static/js/calendar2.js"></script>
   <script>
     // 添加显示日历的函数
     window.showCalendar = function () {
@@ -241,7 +243,7 @@
     });
   </script>
 
-
+  <!-- 到这里结束 -->
 </body>
 
 </html>
