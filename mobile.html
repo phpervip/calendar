@@ -53,7 +53,6 @@
     .section-title {
       font-weight: bold;
       margin-bottom: 10px;
-      color: #bc2f3f;
       border-bottom: 1px solid #eee;
       padding-bottom: 5px;
     }
@@ -115,14 +114,104 @@
       display: flex;
       gap: 10px;
       margin-bottom: 10px;
+      padding: 0 50px;
+      /* 增加左右内边距 */
     }
 
     .date-selector select,
     .date-selector input {
-      padding: 5px;
+      padding: 8px 12px;
+      /* 增加输入框内边距使其更高 */
       border: 1px solid #ddd;
       border-radius: 5px;
       flex: 1;
+      font-size: 14px;
+      /* 确保字体大小合适 */
+    }
+
+    /* 在 style 标签中添加 */
+    .flex-container {
+      display: flex;
+      gap: 10px;
+    }
+
+    .flex-item {
+      flex: 1;
+    }
+
+    /* 在 style 标签中添加 */
+    /* 删除之前的样式，改为最简单的布局 */
+    .yi-list,
+    .ji-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding: 0;
+    }
+
+    .yi-list li,
+    .ji-list li {
+      text-align: center;
+      font-size: 14px;
+      padding: 4px 0;
+    }
+
+    .yi-list li,
+    .ji-list li {
+      background: #f8f8f8;
+      padding: 8px;
+      border-radius: 4px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    /* 在 style 中添加 */
+    .section-title.center-title {
+      text-align: center;
+      padding-bottom: 10px;
+    }
+
+    /* 在 style 中添加 */
+    .date {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .date a {
+      color: #999;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    #date-day {
+      font-size: 36px;
+      font-weight: bold;
+    }
+
+    /* HTML部分保持不变 */
+    /* 在 style 中添加 */
+    .section .item {
+      min-height: 24px;
+      /* 设置最小高度 */
+      align-items: center;
+      /* 垂直居中 */
+    }
+
+    /* 调整多行的情况 */
+    .section .item+.item {
+      margin-top: 8px;
+      /* 行间距 */
+    }
+
+    /* 确保右侧两行的 item 占据相同的空间 */
+    .section .item:only-child,
+    .section .item:first-child:nth-last-child(2),
+    .section .item:last-child:nth-first-child(2) {
+      padding: 12px 0;
+      /* 增加上下内边距 */
     }
   </style>
 </head>
@@ -134,98 +223,43 @@
       <select id="monthInput"></select>
       <input type="number" id="dayInput" placeholder="日">
     </div>
-
-    <div class="date-panel">
-      <div class="solar-date" id="solarDate">2024年2月26日 星期一</div>
-      <div class="date">
-        <a href="javascript:void(0);" class="prev">◀</a>
-        <span id="date-day">21</span>
-        <a href="javascript:void(0);" class="next">▶</a>
+    <div class="flex-container">
+      <div class="section flex-item">
+        <div class="solar-date" id="solarDate">2024年2月26日 星期一</div>
+        <div class="lunar-date" id="lunarDate">农历甲辰年正月十七</div>
       </div>
-      <div class="lunar-date" id="lunarDate">农历甲辰年正月十七</div>
-    </div>
 
-    <div class="section">
-      <div class="section-title">年月日</div>
-      <div class="grid">
+      <div class="section flex-item">
+        <div class="date">
+          <a href="javascript:void(0);" class="prev">◀</a>
+          <span id="date-day">21</span>
+          <a href="javascript:void(0);" class="next">▶</a>
+        </div>
+      </div>
+    </div>
+    <div class="flex-container">
+      <div class="section flex-item">
+        <div class="section-title">干支 生肖 纳音五行</div>
         <div class="item">
-          <span class="label">年柱</span>
           <span class="value" id="yearGanZhi">甲辰年</span>
-        </div>
-        <div class="item">
-          <span class="label">年命</span>
           <span class="value" id="yearShengXiao">属龙</span>
-        </div>
-        <div class="item">
-          <span class="label">年纳音</span>
           <span class="value" id="yearNaYin">-</span>
         </div>
         <div class="item">
-          <span class="label">月柱</span>
           <span class="value" id="monthGanZhi">丙寅月</span>
-        </div>
-        <div class="item">
-          <span class="label">月命</span>
           <span class="value" id="monthShengXiao">属虎</span>
-        </div>
-        <div class="item">
-          <span class="label">月纳音</span>
           <span class="value" id="monthNaYin">-</span>
         </div>
         <div class="item">
-          <span class="label">日柱</span>
           <span class="value" id="dayGanZhi">戊寅日</span>
-        </div>
-        <div class="item">
-          <span class="label">日命</span>
           <span class="value" id="dayShengXiao">属虎</span>
-        </div>
-        <div class="item">
-          <span class="label">日纳音</span>
           <span class="value" id="dayNaYin"></span>
         </div>
-      </div>
-    </div>
-    <!-- 节气 -->
-    <div class="section">
-      <div class="section-title">节气</div>
-      <div id="prevJieQi"></div>
-      <div id="nextJieQi"></div>
-    </div>
-    <!-- 宜忌 -->
-    <div class="section">
-      <div class="section-title">宜忌</div>
-      <div class="yi-ji">
-        <div class="yi">
-          <div class="yi-title">宜</div>
-          <ul id="yj-yi"></ul>
-        </div>
-        <div class="ji">
-          <div class="ji-title">忌</div>
-          <ul id="yj-ji"></ul>
-        </div>
-      </div>
-    </div>
-    <!-- 神煞 -->
-    <div class="section">
-      <div class="section-title">神煞</div>
-      <div class="grid">
-        <div class="item">
-          <span class="label">吉神宜趋</span>
-          <ul class="value" id="jishen"></ul>
-        </div>
-        <div class="item">
-          <span class="label">凶煞宜忌</span>
-          <ul class="value" id="xiongsha"></ul>
-        </div>
-      </div>
-    </div>
 
-    <!-- 相冲 值神 十二神 -->
-    <div class="section">
-      <div class="section-title">相冲 值神 十二神</div>
-      <div class="grid">
-
+      </div>
+      <!-- 相冲 值神 十二神 -->
+      <div class="section flex-item">
+        <div class="section-title">相冲 值神 十二神</div>
         <div class="item">
           <span class="label">相冲</span>
           <span class="value" id="xiangchong"></span>
@@ -238,66 +272,149 @@
           <span class="label">十二神</span>
           <span class="value" id="shen12"></span>
         </div>
-
+      </div>
+    </div>
+    <!-- 节气 -->
+    <div class="flex-container">
+      <div class="section flex-item">
+        <div class="section-title">上一节气</div>
+        <div class="value" id="prevJieQi"></div>
+      </div>
+      <div class="section flex-item">
+        <div class="section-title">下一节气</div>
+        <div class="value" id="nextJieQi"></div>
+      </div>
+    </div>
+    <!-- 宜忌  -->
+    <div class="flex-container">
+      <!-- 宜 -->
+      <div class="section flex-item">
+        <div class="section-title center-title">宜</div>
+        <ul class="value yi-list" id="yj-yi"></ul>
+      </div>
+      <!-- 忌 -->
+      <div class="section flex-item">
+        <div class="section-title center-title">忌</div>
+        <ul class="value ji-list" id="yj-ji"></ul>
+      </div>
+    </div>
+    <!-- 神煞 -->
+    <div class="flex-container">
+      <!-- 神 -->
+      <div class="section flex-item">
+        <div class="section-title center-title">吉神宜趋</div>
+        <ul class="value yi-list" id="jishen"></ul>
+      </div>
+      <!-- 煞 -->
+      <div class="section flex-item">
+        <div class="section-title center-title">凶煞宜忌</div>
+        <ul class="value ji-list" id="xiongsha"></ul>
       </div>
     </div>
 
-    <!-- 彭祖百忌 -->
-    <div class="section">
-      <div class="section-title">彭祖百忌</div>
-      <div class="grid">
-        <div class="item">
-          <span class="label">彭祖</span>
-          <span class="value" id="pengzu"></span>
-        </div>
-        <div class="item">
-          <span class="label">百忌</span>
-          <span class="value" id="baiji"></span>
-        </div>
-      </div>
-    </div>
 
+    <!-- 左右两栏布局 -->
+    <div class="flex-container">
+      <!-- 左栏 -->
+      <div class="flex-item">
+        <!-- 彭祖百忌 -->
+        <div class="section">
+          <div class="section-title">彭祖 百忌</div>
 
-    <!-- 月名月相物候 -->
-    <div class="section">
-      <div class="section-title">月名月相物候</div>
-      <div class="grid">
-        <div class="item">
-          <span class="label">月名</span>
-          <span class="value" id="yueming"></span>
+          <div class="item">
+            <span class="label">彭祖</span>
+            <span class="value" id="pengzu"></span>
+          </div>
+          <div class="item">
+            <span class="label">百忌</span>
+            <span class="value" id="baiji"></span>
+          </div>
+
         </div>
-        <div class="item">
-          <span class="label">月相</span>
-          <span class="value" id="yuexiang"></span>
+
+        <!-- 月名月相物候 -->
+        <div class="section">
+          <div class="section-title">月名 月相 物候</div>
+
+          <div class="item">
+            <span class="label">月名</span>
+            <span class="value" id="yueming"></span>
+          </div>
+          <div class="item">
+            <span class="label">月相</span>
+            <span class="value" id="yuexiang"></span>
+          </div>
+          <div class="item">
+            <span class="label">物候</span>
+            <span class="value" id="wuhou"></span>
+          </div>
+
         </div>
-        <div class="item">
-          <span class="label">物候</span>
-          <span class="value" id="wuhou"></span>
+      </div>
+
+      <!-- 右栏 -->
+      <div class="flex-item">
+        <!-- 胎神 -->
+        <div class="section">
+          <div class="section-title">胎神</div>
+
+          <div class="item">
+            <span class="label">本月胎神</span>
+            <span class="value" id="monthTaiShen"></span>
+          </div>
+          <div class="item">
+            <span class="label">今日胎神</span>
+            <span class="value" id="dayTaiShen"></span>
+          </div>
+
+        </div>
+
+        <!-- 岁煞六曜日禄 -->
+        <div class="section">
+          <div class="section-title">岁煞 六曜 日禄</div>
+
+          <div class="item">
+            <span class="label">岁煞</span>
+            <span class="value" id="suiSha"></span>
+          </div>
+          <div class="item">
+            <span class="label">六曜</span>
+            <span class="value" id="liuYao"></span>
+          </div>
+          <div class="item">
+            <span class="label">日禄</span>
+            <span class="value" id="dayLu"></span>
+          </div>
+
         </div>
       </div>
     </div>
-    <!-- 财神位 -->
-    <div class="section">
-      <div class="section-title">财神位</div>
-      <div class="grid">
-        <div class="item">
-          <span class="label">财神</span>
-          <span class="value" id="caishen"></span>
-        </div>
-        <div class="item">
-          <span class="label">喜神</span>
-          <span class="value" id="xishen"></span>
-        </div>
-        <div class="item">
-          <span class="label">福神</span>
-          <span class="value" id="fushen"></span>
+    <!-- 左右两栏布局 -->
+    <div class="flex-container">
+      <!-- 左栏 -->
+      <!-- 财神位 -->
+      <div class="section flex-item">
+        <div class="section-title">财神位</div>
+        <div class="section-content">
+          <div class="item">
+            <span class="label">财神</span>
+            <span class="value" id="caishen"></span>
+          </div>
+          <div class="item">
+            <span class="label">喜神</span>
+            <span class="value" id="xishen"></span>
+          </div>
+          <div class="item">
+            <span class="label">福神</span>
+            <span class="value" id="fushen"></span>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- 阳贵阴贵 -->
-    <div class="section">
-      <div class="section-title">阳贵阴贵</div>
-      <div class="grid">
+
+      <!-- 右栏 -->
+      <div class="flex-item section">
+        <!-- 阳贵阴贵 -->
+        <div class="section-title">阳贵阴贵</div>
         <div class="item">
           <span class="label">阳贵神</span>
           <ul class="value" id="yangGui"></ul>
@@ -308,10 +425,13 @@
         </div>
       </div>
     </div>
-    <!-- 空亡所值 -->
-    <div class="section">
-      <div class="section-title">空亡所值</div>
-      <div class="grid">
+
+    <!-- 左右两栏布局 -->
+    <div class="flex-container">
+      <!-- 左栏 -->
+      <!-- 空亡所值 -->
+      <div class="section flex-item">
+        <div class="section-title ">空亡所值</div>
         <div class="item">
           <span class="label">年</span>
           <ul class="value" id="yearKongWang"></ul>
@@ -325,11 +445,10 @@
           <ul class="value" id="dayKongWang"></ul>
         </div>
       </div>
-    </div>
-    <!-- 九宫飞星 星宿 -->
-    <div class="section">
-      <div class="section-title">九宫飞星</div>
-      <div class="grid">
+      <!-- 右栏 -->
+      <!-- 九宫飞星 -->
+      <div class="section flex-item">
+        <div class="section-title">九宫飞星</div>
         <div class="item">
           <span class="label">九星</span>
           <span class="value" id="yearNineStar"></span>
@@ -347,40 +466,9 @@
           <span id="gengtian">四牛耕田</span>
         </div>
       </div>
-    </div>
 
-    <!-- 胎神 -->
-    <div class="section">
-      <div class="section-title">胎神</div>
-      <div class="grid">
-        <div class="item">
-          <span class="label">本月胎神</span>
-          <span class="value" id="monthTaiShen"></span>
-        </div>
-        <div class="item">
-          <span class="label">今日胎神</span>
-          <span class="value" id="dayTaiShen"></span>
-        </div>
-      </div>
     </div>
-    <!-- 岁煞六曜日禄 -->
-    <div class="section">
-      <div class="section-title">岁煞六曜日禄</div>
-      <div class="grid">
-        <div class="item">
-          <span class="label">岁煞</span>
-          <span class="value" id="suiSha"></span>
-        </div>
-        <div class="item">
-          <span class="label">六曜</span>
-          <span class="value" id="liuYao"></span>
-        </div>
-        <div class="item">
-          <span class="label">日禄</span>
-          <span class="value" id="dayLu"></span>
-        </div>
-      </div>
-    </div>
+  </div>
   </div>
 
   <script src="static/lunar.min.js"></script>
