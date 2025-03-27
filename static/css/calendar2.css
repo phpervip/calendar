@@ -481,7 +481,7 @@
     }
 
     .container-c .calendar .row-r.col-c {
-      min-height: 80px;
+      min-height: 100px;
     }
   }
 }
